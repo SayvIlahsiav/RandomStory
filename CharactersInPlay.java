@@ -50,9 +50,22 @@ public class CharactersInPlay {
         }
     }
     
+    private void charactersWithNumParts(int num1, int num2) {
+        findAllCharacters();
+        for(int k=0; k < charNames.size(); k++){
+            if(charCounts.get(k) >= num1 && charCounts.get(k) <= num2) {
+                System.out.println(charCounts.get(k) + "\t" + charNames.get(k).trim());
+            }
+        }
+    }
+    
+    public void testCharactersWithNumParts() {
+        charactersWithNumParts(2, 10);
+    }
+    
     public static void main(String[] args) {
         CharactersInPlay cip = new CharactersInPlay();
-        cip.testFindAllCharacters();
+        cip.testCharactersWithNumParts();
     }
 
 }
