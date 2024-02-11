@@ -1,4 +1,5 @@
 import java.util.*;
+import edu.duke.*;
 
 /**
  * Write a description of CharactersInPlay here.
@@ -15,8 +16,43 @@ public class CharactersInPlay {
         charCounts = new ArrayList<Integer>();
     }
     
+    private void update(String person) {
+        int index = charNames.indexOf(person);
+            if(index == -1) {
+                charNames.add(person);
+                charCounts.add(1);
+            }
+            else {
+                int value = charCounts.get(index);
+                charCounts.set(index, value+1);
+            }
+    }
+    
+    private void findAllCharacters() {
+        charNames.clear();
+        charCounts.clear();
+        FileResource res = new FileResource();
+        for (String s : res.lines()) {
+            int endIndex = s.indexOf(".");
+            if (endIndex != -1) {
+                String person = s.substring(0, endIndex);
+                update(person);
+            }
+        }
+    }
+    
+    public void testFindAllCharacters() {
+        findAllCharacters();
+        for(int k=0; k < charNames.size(); k++){
+            if(charCounts.get(k) > 1) {
+                System.out.println(charCounts.get(k) + "\t" + charNames.get(k).trim());
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         CharactersInPlay cip = new CharactersInPlay();
+        cip.testFindAllCharacters();
     }
 
 }
