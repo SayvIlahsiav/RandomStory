@@ -36,9 +36,37 @@ public class WordFrequencies {
     
     public void testFindUnique() {
         findUnique();
+        System.out.println("Number of unique words: " + myWords.size());
         for(int k=0; k < myWords.size(); k++){
             System.out.println(myFreqs.get(k) + "\t" + myWords.get(k));
         }
+    }
+    
+    private int findIndexOfMax() {
+        int maxIndex = 0; // Start with the first index
+        int max = myFreqs.get(0); // Assume the first frequency is the max to start
+        for(int k = 0; k < myFreqs.size(); k++) {
+            if (myFreqs.get(k) > max) {
+                max = myFreqs.get(k);
+                maxIndex = k; // Update maxIndex when a new max is found
+            }
+        }
+        return maxIndex; // Return the index of the max frequency
+    }
+    
+    public void testFindIndexOfMax() {
+        int maxIndex = findIndexOfMax();
+        if(maxIndex != -1) { // Check if the list is not empty
+            System.out.println("The word that occurs most often and its count are: " + myWords.get(maxIndex) + "\t" + myFreqs.get(maxIndex));
+        } else {
+            System.out.println("No words found.");
+        }
+    }
+    
+    public static void main(String[] args) {
+        WordFrequencies wf = new WordFrequencies();
+        wf.testFindUnique();
+        wf.testFindIndexOfMax();
     }
 
 }
